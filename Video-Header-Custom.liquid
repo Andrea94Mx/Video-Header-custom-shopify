@@ -1,0 +1,255 @@
+<style>
+    @font-face {
+      font-family: 'SSNick';
+      src: url('https://cdn.shopify.com/s/files/1/0567/8737/0028/files/SS-Nickson-One.woff?v=1709320334') format('woff');
+    }
+  
+    @font-face {
+      font-family: 'SSNickFour';
+      src: url('https://cdn.shopify.com/s/files/1/0567/8737/0028/files/SSNickFour.ttf?v=1709758144') format('woff');
+    }
+  
+    .mainHeader {
+      font-size: 60px;
+      font-weight: 700;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  
+    .videoHeaderContainer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      padding: 50px;
+      margin-bottom: 10px;
+      color: white;
+      text-align: left;
+     
+    }
+  
+    .subHeader, .mainHeader {
+      background-image: linear-gradient(to right, #cc9f53 1%, #f0d283 50%, #b78b1e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  
+    .dividerHeader {
+      width: 30%;
+      border: none;
+      border-top: 1px solid white;
+      margin-bottom: 20px;
+    }
+  
+    .paraHeader {
+      max-width: 600px;
+      margin: 0;
+    }
+  
+    .paraHeader{
+  color:white;
+      font-size:20px;
+  }
+  
+    .subHeader{
+  font-size:30px;
+      font-weight: 600;
+      margin-bottom: 0px;
+    }
+  
+    .dividerHeader{
+  margin-top: 20px;
+  }
+  
+  
+  
+     @media (max-width: 768px) {
+      .mainHeader {
+        font-size: 50px;
+      }
+  
+      .subHeader {
+        font-size: 30px;
+      }
+  
+      .paraHeader {
+        font-size: 16px;
+      }
+    }
+  
+    @media (max-width: 450px) {
+          .mainHeader {
+        font-size: 30px;
+      }
+  
+      .subHeader {
+        font-size: 20px;
+      }
+  
+      .paraHeader {
+        font-size: 14px;
+      }
+    }
+  
+  .discoverNowButton {
+      height: 50px;
+      width: 200px;
+      background-color: #d3aa3f;
+    color:black;
+      font-weight: 800;
+      font-family: SSNick;
+      font-size: 2.5rem;
+      border: none;
+      text-align: center;
+        margin-top: 20px;
+      margin-left: 20px;|
+  }
+  
+  .discoverNowButton:hover {
+    background-color: #f0d283;
+    cursor: pointer;
+  }
+  
+  .videoContainer {
+  
+  }
+  
+  .videoWrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .videoWrapper video {
+    width: 100%;
+    height: 800px;
+    object-fit: cover;
+  }
+  
+  .videoMainthing {
+    max-width: 100%;
+  }
+  
+  .VideoLinkHeader {
+    display: block;
+    max-width: 100%;
+  }
+  
+  .unclickableGroup{
+  
+  }
+  
+  
+  
+  
+  </style>
+  <a class="VideoLinkHeader" href="{{ section.settings.VideoLink }}" {% if section.settings.VideoLink == blank %}style="cursor: default;"{% endif %}>
+  <div class="headerVideo" style="width: 100%; height: 75vh; overflow: hidden; position: relative;">
+  
+  
+     <div class="videoContainer">
+    
+      <div class="videoWrapper">
+        {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false }}
+      </div>
+    
+  </div>
+    
+    <div class="videoHeaderContainer">
+  <div class="unclickableGroup">
+      <h2 class="subHeader">{{ section.settings.SubTitleInput }}</h2>
+      <h1 class="mainHeader" style="font-family:SSNickFour;">{{ section.settings.TitleInput }}</h1>
+  <h1 class="mainHeader" style="font-family:SSNickFour;">{{ section.settings.TitleInputTwo }}</h1>
+      <hr class="dividerHeader">
+      <p class="paraHeader">{{ section.settings.ParagraphInput }}</p>
+      </div>
+    <button class="discoverNowButton">{{ section.settings.ButtonTitleInput }}</button>
+    
+    </div>
+  
+  </div>
+  </a>
+  
+  
+  <script> 
+  {% if section.settings.ButtonVisible == true %}
+  
+  
+      console.log("checkbox clicked") 
+  
+        document.getElementsByClassName('discoverNowButton')[0].style.display = 'block';
+  
+  
+      {% endif %}
+  
+  
+  {% if section.settings.ButtonVisible == false %}
+  
+  
+      console.log("checkbox unclicked bih") 
+  
+        document.getElementsByClassName('discoverNowButton')[0].style.display = 'none';
+  
+  
+      {% endif %}
+  </script>
+  
+  
+  {% schema %}
+  {
+    "name": "VideoHeaderPersonalizado",
+    "settings": [
+      {
+        "type": "video",
+        "id": "video",
+        "label": "self-hosted video"
+      },
+      {
+        "type": "url",
+        "id": "VideoLink",
+        "label": "Video Link"
+      },
+      {
+            "type": "text",
+            "id": "SubTitleInput",
+            "label": "Subtitle Input"
+          },
+  
+      {
+            "type": "text",
+            "id": "TitleInput",
+            "label": "Title Input"
+          },
+          {
+            "type": "text",
+            "id": "TitleInputTwo",
+            "label": "Title Input 2"
+          },
+      
+      {
+            "type": "textarea",
+            "id": "ParagraphInput",
+            "label": "Paragraph Input"
+          },
+      {
+            "type": "text",
+            "id": "ButtonTitleInput",
+            "label": "Button Title"
+          },
+      
+      {
+    "type": "checkbox",
+    "id": "ButtonVisible",
+    "label": "Boton Visible",
+    "default": true
+  }
+  
+  
+      
+    ],
+    "presets": [
+      {
+        "name": "VideoHeaderPersonalizado"
+      }
+    ]
+  }
+  {% endschema %}
